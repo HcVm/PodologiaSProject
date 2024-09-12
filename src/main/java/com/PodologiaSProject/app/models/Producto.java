@@ -17,17 +17,25 @@ public class Producto {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-	
-	private String nombre;
-	private String descripcion;
-	
-	@Enumerated(EnumType.STRING)
-	private TipoProductoEnum tipo;
-	private Integer stock;
-	private BigDecimal precio;
-	
-	@Column(name="fecha_registro")
-	private Timestamp fechaRegistro;
+
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column
+    private String descripcion;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoProductoEnum tipo;
+
+    @Column(nullable = false)
+    private int stock;
+
+    @Column
+    private BigDecimal precio;
+
+    @Column(name = "fecha_registro", nullable = false, updatable = false)
+    private Timestamp fechaRegistro;
 
 	public Integer getId() {
 		return id;

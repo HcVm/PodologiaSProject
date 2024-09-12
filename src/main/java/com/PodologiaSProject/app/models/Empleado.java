@@ -1,5 +1,7 @@
 package com.PodologiaSProject.app.models;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,25 +15,35 @@ public class Empleado {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-	
-	private String nombre;
-	private String apellido;
-	private String dni;
-	private String telefono;
-	private String email;
-	
-	@Column(name="fecha_ingreso")
-	private String fechaIngreso;
-	
-	@Enumerated(EnumType.STRING)
-	private TipoEmpleadoEnum cargo;
+    private Long id;
 
-	public Integer getId() {
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column(nullable = false, length = 100)
+    private String apellido;
+
+    @Column(nullable = false, unique = true, length = 15)
+    private String dni;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoEmpleadoEnum cargo;
+
+    @Column(length = 20)
+    private String telefono;
+
+    @Column(length = 100)
+    private String email;
+
+    @Column(name = "fecha_contratacion")
+    private LocalDate fechaContratacion;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,6 +71,14 @@ public class Empleado {
 		this.dni = dni;
 	}
 
+	public TipoEmpleadoEnum getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(TipoEmpleadoEnum cargo) {
+		this.cargo = cargo;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
@@ -75,37 +95,29 @@ public class Empleado {
 		this.email = email;
 	}
 
-	public String getFechaIngreso() {
-		return fechaIngreso;
+	public LocalDate getFechaContratacion() {
+		return fechaContratacion;
 	}
 
-	public void setFechaIngreso(String fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
+	public void setFechaContratacion(LocalDate fechaContratacion) {
+		this.fechaContratacion = fechaContratacion;
 	}
 
-	public TipoEmpleadoEnum getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(TipoEmpleadoEnum cargo) {
-		this.cargo = cargo;
-	}
-
-	public Empleado(String nombre, String apellido, String dni, String telefono, String email, String fechaIngreso,
-			TipoEmpleadoEnum cargo) {
-		
+	public Empleado(String nombre, String apellido, String dni, TipoEmpleadoEnum cargo, String telefono, String email,
+			LocalDate fechaContratacion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
+		this.cargo = cargo;
 		this.telefono = telefono;
 		this.email = email;
-		this.fechaIngreso = fechaIngreso;
-		this.cargo = cargo;
+		this.fechaContratacion = fechaContratacion;
 	}
 
 	public Empleado() {
-		
+
 	}
-	
-	
+    
+    
+
 }

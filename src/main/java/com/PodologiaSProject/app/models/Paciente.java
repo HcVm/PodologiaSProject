@@ -2,7 +2,9 @@ package com.PodologiaSProject.app.models;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,21 +17,29 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-	private String dni;
-	
-	private String nombre;
-	
-	private String apellido;
-	
-	private String telefono;
-	
-	private String email;
-	
-	private String direccion;
-	
-	private Timestamp fecha_registro;
-	
-	private Date fecha_nacimiento;
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column(nullable = false, length = 100)
+    private String apellido;
+
+    @Column(nullable = false, unique = true, length = 15)
+    private String dni;
+
+    @Column
+    private LocalDate fechaNacimiento;
+
+    @Column(length = 255)
+    private String direccion;
+
+    @Column(length = 20)
+    private String telefono;
+
+    @Column(length = 100)
+    private String email;
+
+    @Column(name = "fecha_registro", nullable = false, updatable = false)
+    private Timestamp fechaRegistro;
 
 	public Integer getId() {
 		return id;
@@ -37,14 +47,6 @@ public class Paciente {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
 	}
 
 	public String getNombre() {
@@ -63,6 +65,30 @@ public class Paciente {
 		this.apellido = apellido;
 	}
 
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
@@ -79,45 +105,29 @@ public class Paciente {
 		this.email = email;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public Timestamp getFechaRegistro() {
+		return fechaRegistro;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setFechaRegistro(Timestamp fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}
 
-	public Timestamp getFecha_registro() {
-		return fecha_registro;
-	}
-
-	public void setFecha_registro(Timestamp fecha_registro) {
-		this.fecha_registro = fecha_registro;
-	}
-
-	public Date getFecha_nacimiento() {
-		return fecha_nacimiento;
-	}
-
-	public void setFecha_nacimiento(Date fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
-	}
-
-	public Paciente(String dni, String nombre, String apellido, String telefono, String email, String direccion,
-			Timestamp fecha_registro, Date fecha_nacimiento) {
-		this.dni = dni;
+	public Paciente(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String direccion,
+			String telefono, String email, Timestamp fechaRegistro) {
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.dni = dni;
+		this.fechaNacimiento = fechaNacimiento;
+		this.direccion = direccion;
 		this.telefono = telefono;
 		this.email = email;
-		this.direccion = direccion;
-		this.fecha_registro = fecha_registro;
-		this.fecha_nacimiento = fecha_nacimiento;
+		this.fechaRegistro = fechaRegistro;
 	}
 
 	public Paciente() {
 
 	}
 
-
+	
 }

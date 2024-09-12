@@ -2,6 +2,7 @@ package com.PodologiaSProject.app.models;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,10 +14,17 @@ public class Tratamiento {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-	
-	private String nombre;
-	private String descripcion;
-	private BigDecimal costo;
+
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column
+    private String descripcion;
+
+    @Column(nullable = false)
+    private BigDecimal costo;
+    
+    
 	public Integer getId() {
 		return id;
 	}
