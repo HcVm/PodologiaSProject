@@ -17,7 +17,7 @@ public class Empleado {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -41,11 +41,11 @@ public class Empleado {
     @Column(name = "fecha_contratacion")
     private LocalDate fechaContratacion;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

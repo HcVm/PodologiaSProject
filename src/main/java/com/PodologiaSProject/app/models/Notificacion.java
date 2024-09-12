@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 public class Notificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario") 
@@ -34,11 +34,11 @@ public class Notificacion {
     @Column(nullable = false)
     private EstadoNotificacion estado;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

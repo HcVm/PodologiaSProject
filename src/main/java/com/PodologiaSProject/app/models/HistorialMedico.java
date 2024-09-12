@@ -17,7 +17,7 @@ public class HistorialMedico {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_paciente", nullable = false)
@@ -33,11 +33,11 @@ public class HistorialMedico {
     @Column
     private String observaciones;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -19,7 +19,7 @@ public class MovimientoInventario {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_producto", nullable = false)
@@ -38,11 +38,11 @@ public class MovimientoInventario {
     @Column(name = "fecha", nullable = false, updatable = false)
     private Timestamp fecha;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

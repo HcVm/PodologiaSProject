@@ -20,7 +20,7 @@ public class Pago {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_cita", nullable = false)
@@ -36,11 +36,11 @@ public class Pago {
     @Column(name = "metodo_pago", nullable = false)
     private MetodoPagoEnum metodoPago;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
