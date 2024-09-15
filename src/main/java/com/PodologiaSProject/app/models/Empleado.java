@@ -2,6 +2,7 @@ package com.PodologiaSProject.app.models;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,6 +40,10 @@ public class Empleado {
 
     @Column(length = 100)
     private String email;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", unique = true)
+    private Usuario usuario;
 
     @Column(name = "fecha_contratacion")
     private LocalDate fechaContratacion;
@@ -97,6 +104,14 @@ public class Empleado {
 		this.email = email;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public LocalDate getFechaContratacion() {
 		return fechaContratacion;
 	}
@@ -106,20 +121,19 @@ public class Empleado {
 	}
 
 	public Empleado(String nombre, String apellido, String dni, TipoEmpleadoEnum cargo, String telefono, String email,
-			LocalDate fechaContratacion) {
+			Usuario usuario, LocalDate fechaContratacion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.cargo = cargo;
 		this.telefono = telefono;
 		this.email = email;
+		this.usuario = usuario;
 		this.fechaContratacion = fechaContratacion;
 	}
 
 	public Empleado() {
 
 	}
-    
-    
-
+	
 }

@@ -7,5 +7,7 @@ import com.PodologiaSProject.app.models.HistorialMedico;
 
 @Repository
 public interface HistorialMedicoRepository extends JpaRepository<HistorialMedico, Integer>{
+	
+	HistorialMedico findByIdAtencion(Integer idAtencion);
 
 }
