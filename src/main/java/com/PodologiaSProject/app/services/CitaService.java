@@ -56,6 +56,15 @@ public class CitaService {
         Optional<Cita> citaOptional = citaRepository.findById(id);
         return citaOptional.orElseThrow(() -> new ResourceNotFoundException("Cita no encontrada con ID: " + id));
     }
+    
+    public List<Object[]> obtenerCitasPorPodologo(LocalDate fechaInicio, LocalDate fechaFin) {
+        
+        if (fechaInicio != null && fechaFin != null) {
+            return citaRepository.findCitasPorPodologoEntreFechas(fechaInicio.atStartOfDay(), fechaFin.atTime(LocalTime.MAX));
+        } else {
+            return citaRepository.findCitasPorPodologo();
+        }
+    }
 
     public List<Cita> listarCitas() {
         return citaRepository.findAll();

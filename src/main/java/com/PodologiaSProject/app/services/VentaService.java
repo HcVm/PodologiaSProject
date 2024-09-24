@@ -1,6 +1,8 @@
 package com.PodologiaSProject.app.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +63,15 @@ public class VentaService {
     public Venta buscarVentaPorId(Integer id) {
         Optional<Venta> ventaOptional = ventaRepository.findById(id);
         return ventaOptional.orElseThrow(() -> new ResourceNotFoundException("Venta no encontrada con ID: " + id));
+    }
+    
+    public BigDecimal calcularTotalIngresosPorVentas(LocalDate fechaInicio, LocalDate fechaFin) {
+
+        if (fechaInicio != null && fechaFin != null) {
+            return ventaRepository.calcularTotalIngresosPorVentasEntreFechas(fechaInicio.atStartOfDay(), fechaFin.atTime(LocalTime.MAX));
+        } else {
+            return ventaRepository.calcularTotalIngresosPorVentas();
+        }
     }
 
     public List<Venta> listarVentas() {

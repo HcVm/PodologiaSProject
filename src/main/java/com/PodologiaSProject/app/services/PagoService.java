@@ -1,6 +1,8 @@
 package com.PodologiaSProject.app.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,14 @@ public class PagoService {
 
     public List<Pago> listarPagos() {
         return pagoRepository.findAll();
+    }
+    
+    public BigDecimal calcularTotalIngresosPorCitas(LocalDate fechaInicio, LocalDate fechaFin) {
+        if (fechaInicio != null && fechaFin != null) {
+            return pagoRepository.calcularTotalIngresosPorCitasEntreFechas(fechaInicio.atStartOfDay(), fechaFin.atTime(LocalTime.MAX));
+        } else {
+            return pagoRepository.calcularTotalIngresosPorCitas();
+        }
     }
 
     public Pago actualizarPago(Pago pago) {

@@ -20,12 +20,12 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
 
 
-    public Usuario crearUsuario(Usuario usuario) {
+    public Usuario crearUsuario(Usuario usuario, String contrasena) { 
         if (usuarioRepository.findByNombreUsuario(usuario.getNombreUsuario()) != null) {
             throw new RuntimeException("El nombre de usuario ya está en uso.");
         }
 
-        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+        usuario.setContrasena(passwordEncoder.encode(contrasena));
         return usuarioRepository.save(usuario);
     }
 
