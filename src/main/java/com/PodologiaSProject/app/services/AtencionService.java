@@ -17,7 +17,7 @@ import com.PodologiaSProject.app.models.HistorialMedico;
 @Service
 public class AtencionService  {
 
-    @Autowired
+    @Autowired //Esta anotación sirve para la inyección de dependencias
     private AtencionRepository atencionRepository;
 
     @Autowired

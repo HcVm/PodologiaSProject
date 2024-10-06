@@ -46,6 +46,10 @@ public class PacienteService {
     public List<Paciente> listarPacientes() {
         return pacienteRepository.findAll();
     }
+    
+    public Paciente buscarPacientePorDni(String dni) {
+        return pacienteRepository.findByDni(dni);
+    }
 
     public Paciente actualizarPaciente(Paciente paciente) {
 

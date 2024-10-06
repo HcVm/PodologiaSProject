@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.PodologiaSProject.app.models.Empleado;
 import com.PodologiaSProject.app.models.MovimientoInventario;
@@ -32,7 +33,7 @@ import com.PodologiaSProject.app.services.TratamientoService;
 import com.PodologiaSProject.app.services.UsuarioService;
 import com.PodologiaSProject.app.services.VentaService;
 
-@Controller
+@RestController
 @RequestMapping("/administrador")
 public class AdministradorController {
 
@@ -74,7 +75,6 @@ public class AdministradorController {
     @GetMapping("/usuarios/nuevo")
     public String mostrarFormularioNuevoUsuario(Model model) {
         model.addAttribute("usuario", new Usuario());
-
         model.addAttribute("roles", Rol.values()); 
         return "administrador/formulario-usuario";
     }
@@ -85,9 +85,7 @@ public class AdministradorController {
             model.addAttribute("roles", Rol.values());
             return "administrador/formulario-usuario";
         } 
-        String contrasena = usuario.getContrasena();
-
-        usuarioService.crearUsuario(usuario, contrasena);
+        usuarioService.crearUsuario(usuario);
         return "redirect:/administrador/usuarios";
     }
 
@@ -135,17 +133,42 @@ public class AdministradorController {
         return "administrador/formulario-empleado";
     }
 
-    @PostMapping("/empleados")
+    @PostMapping("/empleados/nuevo")
     public String crearEmpleado(@ModelAttribute("empleado") @Validated Empleado empleado, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("cargos", TipoEmpleadoEnum.values());
             return "administrador/formulario-empleado";
         }
 
-        String contrasena = ""; //Aún tengo que verificar el seteo de contraseñas en usuario o empleado
+        Empleado nuevoEmpleado = empleadoService.crearEmpleado(empleado);
+        return "redirect:/administrador/usuarios/nuevo/" + nuevoEmpleado.getId();
+    }
 
-        empleadoService.crearEmpleado(empleado, contrasena);
-        return "redirect:/administrador/empleados";
+    @GetMapping("/usuarios/nuevo/{empleadoId}")
+    public String mostrarFormularioNuevoUsuario(@PathVariable Integer empleadoId, Model model) {
+        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("roles", Rol.values());
+        model.addAttribute("empleadoId", empleadoId);
+        return "administrador/formulario-usuario"; 
+    }
+
+    @PostMapping("/usuarios/nuevo/{empleadoId}")
+    public String crearUsuario(@PathVariable Integer empleadoId, @ModelAttribute("usuario") @Validated Usuario usuario, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("roles", Rol.values());
+            model.addAttribute("empleadoId", empleadoId);
+            return "administrador/formulario-usuario"; 
+        }
+
+        Empleado empleado = empleadoService.buscarEmpleadoPorId(empleadoId);
+        if (empleado == null) {
+            return "redirect:/administrador/empleados"; 
+        }
+
+        usuarioService.crearUsuario(usuario); 
+        empleado.setUsuario(usuario);
+        empleadoService.actualizarEmpleado(empleado);
+        return "redirect:/administrador/empleados"; 
     }
 
     @GetMapping("/empleados/{id}/editar")

@@ -14,6 +14,8 @@ import com.PodologiaSProject.app.models.Cita;
 public interface CitaRepository  extends JpaRepository<Cita, Integer>{
 	
 	boolean existsByIdPodologoAndFechaHora(Integer idPodologo, LocalDateTime fechaHora);
+	
+	List<Cita> findByIdPaciente(Integer idPaciente); 
 
     @Query("SELECT c.podologo, COUNT(c) FROM Cita c GROUP BY c.podologo")
     List<Object[]> findCitasPorPodologo();

@@ -14,6 +14,7 @@ import com.PodologiaSProject.app.Exceptions.ResourceNotFoundException;
 import com.PodologiaSProject.app.dao.CitaRepository;
 import com.PodologiaSProject.app.models.Cita;
 import com.PodologiaSProject.app.models.Disponibilidad;
+import com.PodologiaSProject.app.models.Paciente;
 
 @Service
 public class CitaService {
@@ -21,13 +22,13 @@ public class CitaService {
     @Autowired
     private CitaRepository citaRepository;
 
-    @Autowired
+    @Autowired // La inyección de un service dentro de otro depende de la complejidad del mismo.
     private DisponibilidadService disponibilidadService;
 
     @Autowired
     private NotificacionService notificacionService;
 
-    public Cita crearCita(Cita cita) {
+    public Cita crearCita(Cita cita) { //La creación de un método tiene la siguiente estructura ( public o private - Entidad - Nombre del método - (parámetros))
         validarCita(cita);
         LocalDate fechaCita = cita.getFechaHora().toLocalDate();
         DayOfWeek diaSemana = fechaCita.getDayOfWeek();
@@ -105,9 +106,13 @@ public class CitaService {
 
         citaRepository.deleteById(id);
     }
+    
+    public List<Cita> buscarCitasPorPaciente(Paciente paciente) {
+        return citaRepository.findByIdPaciente(paciente.getId());
+    }
 
 
-    private void validarCita(Cita cita) {
+    private void validarCita(Cita cita) { //La creación de un método tiene la siguiente estructura ( public o private - Entidad - Nombre del método - (parámetros))
         if (cita.getPaciente() == null) {
             throw new IllegalArgumentException("El paciente es obligatorio.");
         }

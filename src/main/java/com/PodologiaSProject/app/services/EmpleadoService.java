@@ -28,21 +28,13 @@ public class EmpleadoService {
     private PasswordEncoder passwordEncoder;
 
 
-    public Empleado crearEmpleado(Empleado empleado, String contrasena) {
+    public Empleado crearEmpleado(Empleado empleado) {
         validarDatosEmpleado(empleado);
 
         if (empleadoRepository.findByDni(empleado.getDni()) != null) {
             throw new IllegalArgumentException("Ya existe un empleado con ese DNI.");
         }
 
-        Usuario usuario = new Usuario();
-        usuario.setNombreUsuario(empleado.getDni());
-        usuario.setContrasena(passwordEncoder.encode(contrasena));
-        Rol rolEmpleado = Rol.valueOf("ROLE_" + empleado.getCargo().toString());
-        usuario.setRol(rolEmpleado);
-        usuarioRepository.save(usuario);
-
-        empleado.setUsuario(usuario);
         return empleadoRepository.save(empleado);
     }
 
