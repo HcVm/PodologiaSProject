@@ -14,7 +14,8 @@ import com.PodologiaSProject.app.models.Pago;
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Integer>{
 	
-	List<Pago> findByIdCita(Integer idCita);
+	@Query("SELECT p FROM Pago p WHERE p.cita.id = :idCita")
+    List<Pago> findByIdCita(@Param("idCita") Integer idCita);
 	
 	@Query("SELECT SUM(p.monto) FROM Pago p")
     BigDecimal calcularTotalIngresosPorCitas();

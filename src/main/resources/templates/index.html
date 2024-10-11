@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica Podológica</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer"    />
+  <style>
+    /* Estilos CSS personalizados */
+    body {
+      font-family: sans-serif;
+    }
+    .navbar {
+      background-color: #f8f9fa!important;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .service-box {
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .testimonial {
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div th:replace="fragments/header :: header(titulo='Clínica Podológica')"></div>
+
+  <header class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h1 class="display-4">Heading</h1>
+          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui.</p>   
+          <a href="#" class="btn btn-primary mr-2">Get Started</a>
+          <a href="#" class="btn btn-outline-secondary">Learn more</a>
+        </div>
+        <div class="col-lg-6 d-none d-lg-block">
+          <img src="https://via.placeholder.com/400x300" alt="Imagen de encabezado" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">SERVICIOS</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="service-box">
+            <img src="https://via.placeholder.com/100x100" alt="Icono de servicio 1">
+            <h3>PODOLOGIA</h3>
+            <p>Lorem ipsum dolor sit amet nulla adipiscing elit. Nunc maximus, nec ut commodo...</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service-box">
+            <img src="https://via.placeholder.com/100x100" alt="Icono de servicio 2">
+            <h3>ESTERILIZACION</h3>
+            <p>Lorem ipsum dolor sit amet nulla adipiscing elit. Nunc maximus, nec ut commodo...</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service-box">
+            <img src="https://via.placeholder.com/100x100" alt="Icono de servicio 3">
+            <h3>PODOLOGIA</h3>
+            <p>Lorem ipsum dolor sit amet nulla adipiscing elit. Nunc maximus, nec ut commodo...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Nuestros Pilares</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="service-box">
+            <h3>01</h3>
+            <h4>Prevención</h4>
+            <p>Lorem ipsum dolor sit amet nulla adipiscing elit. Nunc maximus, nec ut commodo...</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service-box">
+            <h3>02</h3>
+            <h4>Experiencia</h4>
+            <p>Lorem ipsum dolor sit amet nulla adipiscing elit. Nunc maximus, nec ut commodo...</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service-box">
+            <h3>03</h3>
+            <h4>Especialista</h4>
+            <p>Lorem ipsum dolor sit amet nulla adipiscing elit. Nunc maximus, nec ut commodo...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Nuestros Clientes</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="testimonial">
+            <div class="d-flex align-items-center">
+              <img src="https://via.placeholder.com/50x50" alt="Foto del cliente" class="rounded-circle mr-3">
+              <div>
+                <h5>Adam Smith</h5>
+                <p class="text-muted">Designation</p>
+              </div>
+            </div>
+            <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui.</p>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>   
+
+  <div th:replace="fragments/footer :: footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>   
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

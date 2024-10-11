@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title th:text="${titulo}"></title> <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">   
+  </head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Clínica Podológica</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>   
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+          <a class="nav-link" href="/logout">Cerrar sesión</a>
+        </li>
+        <li class="nav-item" sec:authorize="!isAuthenticated()">
+          <a class="nav-link" href="/login">Iniciar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1><th:block th:text="${titulo}">Título</th:block></h1> 
+    <th:block th:if="${mensaje != null}">
+      <div class="alert alert-success" role="alert">
+        <span th:text="${mensaje}"></span>
+      </div>
+    </th:block>
+    <th:block th:if="${error != null}">
+      <div class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+      </div>
+    </th:block>
+</div>
+</body>
+</html>

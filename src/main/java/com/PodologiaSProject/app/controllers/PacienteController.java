@@ -28,7 +28,7 @@ import com.PodologiaSProject.app.services.EmpleadoService;
 import com.PodologiaSProject.app.services.PacienteService;
 
 
-@RestController
+@Controller
 @RequestMapping("/paciente")
 
 public class PacienteController {

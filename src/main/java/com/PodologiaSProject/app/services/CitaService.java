@@ -14,6 +14,7 @@ import com.PodologiaSProject.app.Exceptions.ResourceNotFoundException;
 import com.PodologiaSProject.app.dao.CitaRepository;
 import com.PodologiaSProject.app.models.Cita;
 import com.PodologiaSProject.app.models.Disponibilidad;
+import com.PodologiaSProject.app.models.Empleado;
 import com.PodologiaSProject.app.models.Paciente;
 
 @Service
@@ -69,6 +70,10 @@ public class CitaService {
 
     public List<Cita> listarCitas() {
         return citaRepository.findAll();
+    }
+    
+    public List<Cita> buscarCitasPorPodologo(Empleado podologo) {
+        return citaRepository.findByIdPodologo(podologo.getId());
     }
 
     public Cita actualizarCita(Cita cita) {

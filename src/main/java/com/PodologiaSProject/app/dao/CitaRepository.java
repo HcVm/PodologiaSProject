@@ -13,9 +13,14 @@ import com.PodologiaSProject.app.models.Cita;
 @Repository
 public interface CitaRepository  extends JpaRepository<Cita, Integer>{
 	
-	boolean existsByIdPodologoAndFechaHora(Integer idPodologo, LocalDateTime fechaHora);
+	@Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Cita c WHERE c.podologo.id = :idPodologo AND c.fechaHora = :fechaHora")
+    boolean existsByIdPodologoAndFechaHora(@Param("idPodologo") Integer idPodologo, @Param("fechaHora") LocalDateTime fechaHora);
 	
-	List<Cita> findByIdPaciente(Integer idPaciente); 
+	@Query("SELECT c FROM Cita c WHERE c.paciente.id = :idPaciente")
+    List<Cita> findByIdPaciente(@Param("idPaciente") Integer idPaciente);
+	
+	@Query("SELECT c FROM Cita c WHERE c.podologo.id = :idPodologo")
+    List<Cita> findByIdPodologo(@Param("idPodologo") Integer idPodologo);
 
     @Query("SELECT c.podologo, COUNT(c) FROM Cita c GROUP BY c.podologo")
     List<Object[]> findCitasPorPodologo();

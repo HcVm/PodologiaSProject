@@ -14,9 +14,11 @@ import com.PodologiaSProject.app.models.Venta;
 @Repository
 public interface VentaRepository extends JpaRepository<Venta, Integer>{
 	
-	List<Venta> findByIdPaciente(Integer idPaciente);
+	@Query("SELECT v FROM Venta v WHERE v.paciente.id = :idPaciente")
+    List<Venta> findByIdPaciente(@Param("idPaciente") Integer idPaciente);
 
-    List<Venta> findByIdProducto(Integer idProducto);
+	@Query("SELECT v FROM Venta v WHERE v.producto.id = :idProducto")
+    List<Venta> findByIdProducto(@Param("idProducto") Integer idProducto);
     
     @Query("SELECT SUM(v.precioTotal) FROM Venta v")
     BigDecimal calcularTotalIngresosPorVentas();

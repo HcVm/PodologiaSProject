@@ -33,7 +33,7 @@ import com.PodologiaSProject.app.services.TratamientoService;
 import com.PodologiaSProject.app.services.UsuarioService;
 import com.PodologiaSProject.app.services.VentaService;
 
-@RestController
+@Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
 

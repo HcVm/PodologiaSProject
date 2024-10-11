@@ -3,7 +3,6 @@ package com.PodologiaSProject.app.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import com.PodologiaSProject.app.Exceptions.ResourceNotFoundException;
@@ -17,18 +16,23 @@ public class NotificacionService {
     @Autowired
     private NotificacionRepository notificacionRepository;
 
-
     @Autowired
-    private SimpMessagingTemplate messagingTemplate;
-
+    private EmailServiceImpl emailService;
+    
     public void enviarNotificacion(Notificacion notificacion) {
         notificacionRepository.save(notificacion);
 
-        messagingTemplate.convertAndSendToUser(
-                notificacion.getUsuario().getNombreUsuario(), 
-                "/topic/notificaciones", 
-                notificacion
-        );
+
+        if (notificacion.getUsuario() != null && notificacion.getUsuario().getEmpleado() != null 
+                && notificacion.getUsuario().getEmpleado().getEmail() != null) {
+            emailService.enviarEmail(notificacion.getUsuario().getEmpleado().getEmail(), "Notificación de la clínica", notificacion.getMensaje());
+        }
+
+        // Enviar notificación por SMS si el paciente tiene un número de teléfono
+        if (notificacion.getUsuario() != null && notificacion.getUsuario().getEmpleado() != null 
+                && notificacion.getUsuario().getEmpleado().getTelefono() != null) {
+            // smsService.enviarSms(notificacion.getUsuario().getEmpleado().getTelefono(), notificacion.getMensaje());
+        }
     }
 
     public List<Notificacion> obtenerNotificacionesPorUsuario(Integer usuarioId) {
