@@ -34,11 +34,12 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
+            	.requestMatchers("/paciente/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/administrador/**").hasRole("ADMINISTRADOR")
                 .requestMatchers("/podologo/**").hasRole("PODOLOGO")
                 .requestMatchers("/recepcionista/**").hasRole("RECEPCIONISTA")
-                .requestMatchers("/paciente/**").permitAll()
+                
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
